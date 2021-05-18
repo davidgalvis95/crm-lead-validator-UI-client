@@ -1,5 +1,7 @@
 ### How to use this client
 
+Elaborated by Ivan David Galvis Sandoval
+
 **_THIS CLIENT REQUIRES NVM(NODE VERSION MANAGER) AND NODE TO BE INSTALLED IN YOUR LOCAL MACHINE_**
 
 1) Run `npm install` in the **crm-validator-client (root)** folder
