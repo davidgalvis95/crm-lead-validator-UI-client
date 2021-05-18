@@ -1,5 +1,4 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {FaRegCheckCircle} from 'react-icons/fa'
 import CheckIcon from "../UI/icons/CheckIcon";
 
 import Card from '../UI/Card';
@@ -7,7 +6,6 @@ import './Search.css';
 
 const Search = React.memo(props => {
 
-    const [isSampleLead, setIsSampleId] = useState(false);
     const [enteredFilter, setEnteredFilter] = useState('');
     const [checkProps, setCheckProps] = useState(["15px", "15px"])
     const inputSearchRef = useRef();
@@ -18,8 +16,8 @@ const Search = React.memo(props => {
                 const pattern = new RegExp("\\d{9}");
                 const matches = enteredFilter.match(pattern);
                 if( matches ){
-                    console.log(isSampleLead)
-                    props.sendRequest(true, enteredFilter, isSampleLead);
+                    // console.log(isSampleLead)
+                    props.sendRequest(true, enteredFilter);
                 }else {
                     alert("Please enter a number of 9 digits")
                 }
@@ -31,7 +29,7 @@ const Search = React.memo(props => {
     }, [enteredFilter, inputSearchRef])
 
     const isSampleLeadHandler = () => {
-        setIsSampleId(true)
+        props.sampleLeadHandler();
         setCheckProps( prevState => {
             if(prevState[0] === "15px"){
                 return ["20px", "20px"];

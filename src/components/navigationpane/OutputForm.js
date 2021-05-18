@@ -34,49 +34,45 @@ const OutputForm = React.memo(props => {
                     <div className="form-control">
                         <div>
                             <label htmlFor="id">Id:</label>
-                            <p>{lead.leadId ? lead.leadId : null}</p>
+                            <p>{lead ? lead.leadId : 'No data available'}</p>
                         </div>
                         <div>
                             <label htmlFor="name">Name:</label>
-                            <p>{lead.name ? lead.name : null}</p>
+                            <p>{lead ? lead.name : 'No data available'}</p>
                         </div>
                         <div>
                             <label htmlFor="amount">Email:</label>
-                            <p>{lead.email ? lead.email : null}</p>
+                            <p>{lead ? lead.email : 'No data available'}</p>
                         </div>
-                        {/*<div>*/}
-                        {/*    <label htmlFor="phone">Phone:</label>*/}
-                        {/*    <p>{lead.phone ? lead.phone : null}</p>*/}
-                        {/*</div>*/}
                         <div>
                             <label htmlFor="phone">Birth Date:</label>
-                            <p>{lead.birthDate ? lead.birthDate : null}</p>
+                            <p>{lead ? lead.birthDate : 'No data available'}</p>
                         </div>
                         <div>
                             <div className="result-reaction-w">
                                 <label htmlFor="score">Score:</label>
-                                {lead.isAProspect ?
+                                {lead.isAProspect !== null ?
                                     (lead.score > 60 ?
                                         <RiEmotionHappyFill className="face"/> :
                                         <ImSad2 className="face"/>) :
                                     null}
                             </div>
-                            <p>{lead.score ? lead.score : null}</p>
+                            <p>{lead && lead.score ? lead.score : 0}</p>
                         </div>
                         <div>
                             <div className="result-reaction-w">
                                 <label htmlFor="prospect">The lead is a prospect:</label>
-                                {lead.isAProspect ?
+                                {lead.isAProspect !== null ?
                                     (lead.score > 60 ?
                                         <RiEmotionHappyFill className="face"/> :
                                         <ImSad2 className="face"/>) :
                                     null}
                             </div>
-                            <p className="result-reaction">{lead.isAProspect ? lead.isAProspect : null}</p>
+                            <p className="result-reaction">{lead.isAProspect ? lead.isAProspect : 'No data available'}</p>
                         </div>
                         <div>
                             <label htmlFor="reason">Reason:</label>
-                            <p>{lead.reason ? lead.reason : null}</p>
+                            <p>{lead.reason ? lead.reason : 'No data available'}</p>
                         </div>
                     </div>
                 </div>

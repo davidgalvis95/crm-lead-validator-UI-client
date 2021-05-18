@@ -3,7 +3,7 @@
   top: 30vh;
   left: calc(50% - 15rem);
   width: 30rem;
-  background: white;
+  background: #3c6382;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   z-index: 100;
   border-radius: 7px;
@@ -12,13 +12,19 @@
 .error-modal h2 {
   margin: 0;
   padding: 1rem;
-  background: #30336b;
+  background: black;
   color: white;
   border-radius: 7px 7px 0 0;
 }
 
 .error-modal p {
     padding: 1rem;
+}
+
+.error-modal button {
+  background: #60a3bc;
+  border: #60a3bc;
+  color: white;
 }
 
 .error-modal__actions {

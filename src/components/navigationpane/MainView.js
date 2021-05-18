@@ -4,6 +4,7 @@ import OutputForm from './OutputForm';
 import Search from './Search';
 import "./MainView.css";
 import LoadingIndicator from "../UI/LoadingIndicator";
+import ErrorModal from "../UI/ErrorModal";
 
 function MainView() {
 
@@ -17,16 +18,6 @@ function MainView() {
         reason: null
     }
 
-    const sampleLead = {
-        leadId: 1232124,
-        name: 'David Galvis',
-        birthDate: '1995-04-01',
-        email: 'someemail@gmail.com',
-        score: 50,
-        isAProspect: 'YES',
-        reason: 'I dont know'
-    }
-
 
     const [lead, setLead] = useState(initialLead);
     const [shouldSendRequest, setShouldSendRequest] = useState(false);
@@ -38,69 +29,64 @@ function MainView() {
 
     useEffect(() => {
         if (shouldSendRequest && leadId !=='') {
-
-            console.log(shouldSendRequest)
-            console.log(leadId);
             setShowOutput(true);
             validateLead(leadId, isSample);
         }
-    }, [shouldSendRequest, leadId])
+    }, [shouldSendRequest, leadId, isSample])
 
 
     const validateLead = (leadId, isSample) => {
         const url = `http://localhost:7000/api/v1/validate/${leadId}?isSampleLead=${isSample}`;
-        console.log(url);
         setIsLoading(true);
         console.log('SENDING REQUEST....!')
-        // setTimeout(() => leadValidationResponseHandler(null), 1000)
-
-        fetch(url,
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(responseData => {
-                console.log(responseData);
-                leadValidationResponseHandler(responseData);
-            })
-            .catch(error => {
-                console.log(error);
-                setIsLoading(false);
-                setError(true);
-            });
+        setTimeout(() =>
+            fetch(url,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(responseData => {
+                    leadValidationResponseHandler(responseData);
+                })
+                .catch(error => {
+                    console.log(error);
+                    setIsLoading(false);
+                    setError(true);
+                })
+            , 500 );
     }
 
-    const shouldSendRequestHandler = (sendRequest, leadId, isSample) => {
+    const shouldSendRequestHandler = (sendRequest, leadId) => {
         setShouldSendRequest(sendRequest);
         setLeadId(leadId);
-        setIsSample(isSample);
     }
 
     const leadValidationResponseHandler = (data) => {
         const actualLead = {...initialLead};
-        console.log(isLoading);
-        // actualState.id = data.leadId
-        // actualState.birthDate = data.birthDate
-        // actualState.name = data.firstName + " " + data.lastName
-        // actualState.score = data.score
-        // actualState.reason = data.reason
+        console.log(data.isAProspect);
 
+        actualLead.leadId = data.lead.idNumber;
+        actualLead.name = data.lead.firstName; // + " " + data.lead.lastName TODO THIS IS TOO LONG
+        actualLead.birthDate = `${data.lead.birthDate[0]}-${data.lead.birthDate[1]}-${data.lead.birthDate[2]}`;
+        actualLead.email = data.lead.email;
+        actualLead.score = data.score;
+        actualLead.isAProspect = data.isAProspect ? 'YES' : 'NO';
+        actualLead.reason = data.reasonMessage;
 
-        actualLead.leadId = sampleLead.leadId;
-        actualLead.birthDate = sampleLead.birthDate;
-        actualLead.name = sampleLead.name;
-        actualLead.score = sampleLead.score;
-        actualLead.email = sampleLead.email;
-        actualLead.isAProspect = sampleLead.isAProspect;
-        actualLead.reason = sampleLead.reason;
-
-        // setLead(actualState);
         setLead(actualLead);
         setIsLoading(false);
         console.log(isLoading);
+    }
+
+    const sampleLeadHandler = () => {
+        setIsSample( prevState => !prevState )
+    }
+
+    const clearError = () => {
+        setError(false);
     }
 
 
@@ -116,15 +102,18 @@ function MainView() {
                     <p className="validation-msg">{isSample ? 'Validating sample lead' : 'Validating...'}</p>
                 </div>);
         }
+        if(error){
+            display = <ErrorModal onClose={clearError}>{error}</ErrorModal>
+        }
     }
 
 
 
     return (
         <div className="main-view">
-            <section>
-                <Search sendRequest={shouldSendRequestHandler}/>
-            </section>
+            { error? null :<section>
+                <Search sendRequest={shouldSendRequestHandler} sampleLeadHandler={sampleLeadHandler}/>
+            </section> }
             {display}
         </div>
     );
