@@ -2,7 +2,7 @@
 
 **_THIS CLIENT REQUIRES NVM(NODE VERSION MANAGER) AND NODE TO BE INSTALLED IN YOUR LOCAL MACHINE_**
 
-1) Run "npm install" in the **crm-validator-client (root)** folder
+1) Run `npm install` in the **crm-validator-client (root)** folder
 2) Run "npm start" to view the project
 3) to validate a customer do not forget to have the crm-lead-validator api running
 4) When running it go to `http://localhost:3000/` to view the client
