@@ -1,0 +1,78 @@
+.ingredient-form {
+  width: 75rem;
+  margin: 2rem auto;
+  max-width: 80%;
+}
+
+.form-control label, p {
+  display: block;
+  width: 100%;
+}
+
+.result-output {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+.form-control label  {
+  margin-left: 0.7rem;
+  font-weight: inherit;
+  color: white;
+}
+
+.ingredient-form h1  {
+  text-align: center;
+  color: white;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.form-control p {
+  width: 18rem;
+  font: inherit;
+  padding: 0.2rem 0.5rem 0.3rem;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  background-color: #8ab6d6;
+}
+
+.form-control input:focus {
+  outline: none;
+  border-bottom-color: #ff2058;
+}
+
+.ingredient-form__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.check-icon {
+  width: 10rem;
+  height: 10rem;
+  color: #7bed9f;
+}
+
+.result-reaction-w{
+  display: flex;
+  justify-content: left;
+}
+
+.result-reaction{
+  width: 80%;
+}
+
+.face{
+  color: #fdcb6e;
+  height: 30px;
+  width: 30px;
+}
+
+@media (max-width: 300px) {
+  .result-output {
+    flex-direction: column;
+  }
+}

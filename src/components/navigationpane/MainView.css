@@ -1,0 +1,15 @@
+.main-view {
+    margin-top: 8rem;
+}
+
+.loader-location{
+    display: flex;
+    justify-content: center;
+    height: 4rem;
+}
+
+.validation-msg{
+    color: white;
+    text-align: center;
+    font-family: 'Trebuchet MS', sans-serif;
+}
