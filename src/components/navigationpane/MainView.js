@@ -34,9 +34,11 @@ function MainView() {
         }
     }, [shouldSendRequest, leadId, isSample])
 
-
     const validateLead = (leadId, isSample) => {
-        const url = `http://localhost:7000/api/v1/validate/${leadId}?isSampleLead=${isSample}`;
+
+        const host = process.env.REACT_APP_VALIDATOR_API_HOST;
+        console.log(host);
+        const url = `${host}/api/v1/validate/${leadId}?isSampleLead=${isSample}`;
         setIsLoading(true);
         console.log('SENDING REQUEST....!')
         setTimeout(() =>
